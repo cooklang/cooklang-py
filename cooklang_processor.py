@@ -27,11 +27,7 @@ def process_recipe(recipe):
     'timers': timers,
     'meta': meta,
   }
-  print(all_ingredients)
-    
 
-def find_ingredients(line):
-  return _do_regex("@", line)
 
 def _do_regex(symbol, line):
   ret = []
@@ -65,12 +61,3 @@ def _do_meta(line):
     return match.groups()
   else:
     return None
-
-  
-
-
-
-if __name__ == "__main__":
-  import pprint
-  q = process_recipe('./test_recipes/Three Cup Chicken.cook')
-  pprint.pprint(q)
