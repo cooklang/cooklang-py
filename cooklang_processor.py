@@ -1,6 +1,6 @@
 import re
 
-def process_recipe(recipe):
+def process(recipe):
   recipe_file = open(recipe, 'r')
 
   # todo: comments
