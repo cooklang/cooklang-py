@@ -57,7 +57,7 @@ def _do_regex(symbol, line):
   return ret
 
 def _do_meta(line):
-  if (match := re.match(">>\S*(.*?):\S*(.*)", line)):
+  if (match := re.match(">>\s*(.*?):\s*(.*)", line)):
     return match.groups()
   else:
     return None
