@@ -12,9 +12,9 @@ def recipe(tmp_path):
 def test_anon_timer(recipe):
   recipe.write_text("hello ~{5%minutes}")
   i = c.process(recipe)
-  assert i['cookware'][0] == ("", "5 minutes")
+  assert i['timers'][0] == ("", "5 minutes")
 
 def test_named_timer(recipe):
   recipe.write_text("hello ~egg{5%minutes}")
   i = c.process(recipe)
-  assert i['cookware'][0] == ("egg", "5 minutes")
+  assert i['timers'][0] == ("egg", "5 minutes")
