@@ -9,42 +9,42 @@ def recipe(tmp_path):
   d = tmp_path / "recipe.cook"
   yield d
 
-def test_bare_ingredient(recipe):
+def test_bare_cookware(recipe):
   recipe.write_text("hello #steamer pot")
   i = c.process(recipe)
   assert i['cookware'][0] == ("steamer", "")
 
-def test_bare_ingredient_with_hyphen(recipe):
+def test_bare_cookware_with_hyphen(recipe):
   recipe.write_text("hello #steamer-pot")
   i = c.process(recipe)
   assert i['cookware'][0] == ("steamer-pot", "")
 
-def test_bare_ingredient_with_underscore(recipe):
+def test_bare_cookware_with_underscore(recipe):
   recipe.write_text("hello #steamer_pot")
   i = c.process(recipe)
   assert i['cookware'][0] == ("steamer_pot", "")
 
-def test_brace_ingredient(recipe):
+def test_brace_cookware(recipe):
   recipe.write_text("hello #steamer pot{}")
   i = c.process(recipe)
   assert i['cookware'][0] == ("steamer pot", "")
 
-def test_brace_ingredient_with_hyphen(recipe):
+def test_brace_cookware_with_hyphen(recipe):
   recipe.write_text("hello #steamer-pot{}")
   i = c.process(recipe)
   assert i['cookware'][0] == ("steamer-pot", "")
 
-def test_brace_ingredient_with_underscore(recipe):
+def test_brace_cookware_with_underscore(recipe):
   recipe.write_text("hello #steamer_pot{}")
   i = c.process(recipe)
   assert i['cookware'][0] == ("steamer_pot", "")
 
-def test_brace_ingredient_with_quantity(recipe):
+def test_brace_cookware_with_quantity(recipe):
   recipe.write_text("hello #steamer pot{3}")
   i = c.process(recipe)
   assert i['cookware'][0] == ("steamer pot", "3")
 
-def test_brace_ingredient_with_quantity_and_unit(recipe):
+def test_brace_cookware_with_quantity_and_unit(recipe):
   recipe.write_text("hello #steamer pot{3%boxes}")
   i = c.process(recipe)
   assert i['cookware'][0] == ("steamer pot", "3 boxes")
