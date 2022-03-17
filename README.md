@@ -11,7 +11,7 @@ Cook-in-c is a Cooklang language parser written in C. It features a Python3 C ex
 Download the code as a zip file and extract, or use the git clone command to download:
 
 ```
-git clone https://github.com/cooklang/cook-in-c.git
+git clone https://github.com/cooklang/cook-py.git
 ```
 
 
