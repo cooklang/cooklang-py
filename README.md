@@ -2,11 +2,6 @@
 Cooklang parser in Python based on https://github.com/cooklang/cooklang-c.
 
 
-
-# [WIP] cook-in-c
-
-
-
 Cook-in-c is a Cooklang language parser written in C. It features a Python3 C extension module to make interacting with it easier.
 
 
