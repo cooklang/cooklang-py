@@ -9,7 +9,7 @@ Cooklang parser in Python based on https://github.com/cooklang/cooklang-c.
 Download the code as a zip file and extract, or use the git clone command to download:
 
 ```
-git clone https://github.com/cooklang/cook-py.git
+git clone https://github.com/cooklang/cooklang-py.git
 ```
 
 
