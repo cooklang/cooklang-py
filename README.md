@@ -2,8 +2,6 @@
 Cooklang parser in Python based on https://github.com/cooklang/cooklang-c.
 
 
-Cook-in-c is a Cooklang language parser written in C. It features a Python3 C extension module to make interacting with it easier.
-
 
 ## Install:
 
@@ -22,7 +20,7 @@ python setup.py build
 ```
 The Python module will be built and automatically placed in a folder that is named after the operating system the module is built on. The build will create a folder called build, inside of which will be a few folders. Inside one of these folders the python module will be located. The module can then be accessed in this folder through python.
 
-Users can also install the module to their python environment so that it can be accessed from anywhere using this command:
+Users can also install the module to their python environment so that it can be accessed from anywhere using this command. This command should be run after the build command.:
 ```
 python setup.py install
 ```
