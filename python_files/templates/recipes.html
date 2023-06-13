@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Recipes</h2>
+<div class="accordion">
+  {% for folder, values in recipe_tree.items() %}
+    <div class="card">
+      <div class="card-header" id="{{folder}}_header">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#{{folder}}_items" aria-expanded="false" aria-controls="collapseOne">
+          {{ folder }}
+          </button>
+        </h5>
+      </div>
+    
+      <div id="{{folder}}_items" class="collapse" aria-labelledby="{{folder}}_header" data-bs-parent="#accordion">
+        {% for item in values %}
+          <div class="recipe-item">
+            <a class="btn btn-primary" href="/recipe/?recipe_path={{ item.path }}">
+              {{item.file}}
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  {% endfor %}
+</div>
+{% endblock %}
+

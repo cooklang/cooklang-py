@@ -8,6 +8,16 @@
 
 Cook-in-c is a Cooklang language parser written in C. It features a Python3 C extension module to make interacting with it easier.
 
+## Dependencies:
+
+The following programs are needed:
+* python3.10-dev
+* python3.10-devutils
+* pip for pytho3.10
+* python3.10 -m pip install django
+* pip3 install flask
+
+The code has been checked with black, flake8, mypy and pylint
 
 ## Install:
 
