@@ -45,42 +45,40 @@ if __name__ == "__main__":
     # Path to this directory
     path = os.getcwd()
 
-    match CMD:
-        case "seed":
-            tree = RecipeTree(path)
-            print(tree)
-        case "recipe":
-            if len(sys.argv) < 4:
-                print(f"Wrong number of arguments for {CMD}")
-                print_help()
-                sys.exit(-1)
-            sub_cmd = sys.argv[2]
+    if CMD == "seed":
+        tree = RecipeTree(path)
+        print(tree)
+    elif CMD == "recipe":
+        if len(sys.argv) < 4:
+            print(f"Wrong number of arguments for {CMD}")
+            print_help()
+            sys.exit(-1)
+        sub_cmd = sys.argv[2]
 
-            recipe = Recipe(sys.argv[3])
+        recipe = Recipe(sys.argv[3])
 
-            match sub_cmd:
-                case "read":
-                    # Handle read
-                    # Using % to define units in metadata is broken.
-                    # So don't do that!
-                    print(recipe)
-                case _:
-                    print("Everything except read")
-        case "shopping-list":
-            recipe_paths = []
-            IDX = 2
-            while IDX < len(sys.argv):
-                recipe_paths.append(sys.argv[IDX])
-                IDX += 1
-            print(f"Got {IDX-2} recipes!")
-            ingredients = []
-            shopping_list = ShoppingList()
-            for path in recipe_paths:
-                recipe = parseRecipe(path)
-                shopping_list.add_recipe(recipe)
-            print(shopping_list)
-        case "server":
-            ip = "0.0.0.0"
-            if len(sys.argv) > 2:
-                ip = sys.argv[2]
-            flask_app.main(ip=ip)
+        if sub_cmd == "read":
+            # Handle read
+            # Using % to define units in metadata is broken.
+            # So don't do that!
+            print(recipe)
+        else:
+            print("Everything except read")
+    elif CMD == "shopping-list":
+        recipe_paths = []
+        IDX = 2
+        while IDX < len(sys.argv):
+            recipe_paths.append(sys.argv[IDX])
+            IDX += 1
+        print(f"Got {IDX-2} recipes!")
+        ingredients = []
+        shopping_list = ShoppingList()
+        for path in recipe_paths:
+            recipe = parseRecipe(path)
+            shopping_list.add_recipe(recipe)
+        print(shopping_list)
+    elif CMD == "server":
+        ip = "0.0.0.0"
+        if len(sys.argv) > 2:
+            ip = sys.argv[2]
+        flask_app.main(ip=ip)

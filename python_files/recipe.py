@@ -118,37 +118,34 @@ class Recipe:
             timer = []
 
             for sub_step in step:
-                match sub_step["type"]:
-                    case "text":
-                        text.append(sub_step["value"])
-                    case "cookware":
-                        # Strip trailing commas since the following
-                        # type of writing is to be expected
-                        # "mix [...] with a #blender, allow to settle"
-                        text.append(sub_step["name"])
-                        if quantity := sub_step.get("quantity", None):
-                            cookware.append(
-                                f'{sub_step["name"].strip(",")}: {quantity}'
-                            )
-                        else:
-                            cookware.append(sub_step["name"].strip(","))
-                    case "ingredient":
-                        text.append(sub_step["name"])
-                        quantity = convert_str_to_float(sub_step["quantity"])
-                        ingredient.append(
-                            (
-                                f'{sub_step["name"].strip(",")}:'
-                                + f'{quantity} {sub_step["units"]}'
-                            )
+                if sub_step["type"] == "text":
+                    text.append(sub_step["value"])
+                elif sub_step["type"] == "cookware":
+                    # Strip trailing commas since the following
+                    # type of writing is to be expected
+                    # "mix [...] with a #blender, allow to settle"
+                    text.append(sub_step["name"])
+                    if quantity := sub_step.get("quantity", None):
+                        cookware.append(f'{sub_step["name"].strip(",")}: {quantity}')
+                    else:
+                        cookware.append(sub_step["name"].strip(","))
+                elif sub_step["type"] == "ingredient":
+                    text.append(sub_step["name"])
+                    quantity = convert_str_to_float(sub_step["quantity"])
+                    ingredient.append(
+                        (
+                            f'{sub_step["name"].strip(",")}:'
+                            + f'{quantity} {sub_step["units"]}'
                         )
-                    case "timer":
-                        quantity = convert_str_to_float(sub_step["quantity"])
-                        (quantity, time_unit) = standardize_time(
-                            quantity, sub_step["units"]
-                        )
-                        time = time + quantity
-                        text.append(f"{quantity} {time_unit}")
-                        timer.append((quantity, sub_step["units"]))
+                    )
+                elif sub_step["type"] == "timer":
+                    quantity = convert_str_to_float(sub_step["quantity"])
+                    (quantity, time_unit) = standardize_time(
+                        quantity, sub_step["units"]
+                    )
+                    time = time + quantity
+                    text.append(f"{quantity} {time_unit}")
+                    timer.append((quantity, sub_step["units"]))
 
             # Print step
             string = string + f'     {index}. {"".join(text)}\n'

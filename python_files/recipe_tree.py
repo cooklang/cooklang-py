@@ -48,7 +48,7 @@ class RecipeTree:
         Create a printable version of this class for terminal applications.
         """
         string = "Recipes:\n"
-        for folder in self.tree.items():
+        for folder in self.tree:
             if folder != "Undefined":
                 string += f"  {folder}\n"
                 for node in self.tree[folder]:
