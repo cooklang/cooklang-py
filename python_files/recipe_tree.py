@@ -26,16 +26,24 @@ class RecipeTree:
         for node in root:
             if node[1]:
                 # These are directories
-                for directory in node[1]:
-                    if directory:
-                        self.add_directory(directory)
+                for folder in node[1]:
+                    if folder:
+                        if ".git" not in node[0] and folder != ".git":
+                            # Skip hidden folders! This allows
+                            # having the recipes in a git folder.
+                            self.add_directory(folder)
             if node[2]:
                 # These are files
                 for file_name in node[2]:
                     # Find what directory we are in
-                    if (folder := os.path.basename(node[0])) == "recipes":
+                    folder = os.path.basename(node[0])
+                    if ".git" in node[0] or folder.startswith("."):
+                        # Do nothing. Skip these folders.
+                        pass
+                    elif folder == "recipes":
                         self.add_file_to_dir(node[0], "Undefined", file_name)
                     else:
+                        # Add files and folders, unless folder is hidden.
                         self.add_file_to_dir(node[0], folder, file_name)
 
     @property
