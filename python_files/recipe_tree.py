@@ -34,7 +34,7 @@ class RecipeTree:
                             self.add_directory(folder)
             if node[2]:
                 # These are files
-                for file_name in node[2]:
+                for file_name in sorted(node[2]):
                     # Find what directory we are in
                     folder = os.path.basename(node[0])
                     if ".git" in node[0] or folder.startswith("."):
@@ -45,6 +45,9 @@ class RecipeTree:
                     else:
                         # Add files and folders, unless folder is hidden.
                         self.add_file_to_dir(node[0], folder, file_name)
+
+        # Sort the tree alphabetically
+        self._tree = dict(sorted(self.tree.items()))
 
     @property
     def tree(self):
