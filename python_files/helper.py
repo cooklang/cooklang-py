@@ -27,43 +27,41 @@ def standardize_time(quantity, unit):
         # lower and higher range.
         # This is not hard, but I don't really want to. I'm tired.
         unit = "NOPE"
-    match unit:
-        case ("m" | "min" | "minute" | "minutes"):
-            output = (quantity, "minutes")
-        case ("h" | "hour" | "hours"):
-            output = (quantity * 60, "minutes")
-        case _:
-            output = (0, "Can't parse ranges")
+    if unit in ["m", "min", "minute", "minutes"]:
+        output = (quantity, "minutes")
+    elif unit in ["h", "hour", "hours"]:
+        output = (quantity * 60, "minutes")
+    else:
+        output = (0, "Can't parse ranges")
     return output
 
 
 def standardize_units(quantity, unit):
     """Input volume or weight. Return ml or g"""
     # This will return unit in ml or g
-    match unit:
-        case "tbsp":
-            output = (quantity * 5, "ml")
-        case "tsp":
-            output = (quantity * 15, "ml")
-        case ("cups" | "cup"):
-            output = (quantity * 235, "ml")
-        case "dl":
-            output = (quantity * 100, "ml")
-        case "l":
-            output = (quantity * 1000, "ml")
-        case "pint":
-            output = (quantity * 473, "ml")
-        case "oz":
-            output = (quantity * 29.5, "ml")
-        case "kg":
-            output = (quantity * 1000, "g")
-        case "hg":
-            output = (quantity * 100, "g")
-        case "g":
-            output = (quantity, "g")
-        case _:
-            print("Hm?")
-            output = ("Unkown type!", "Many")
+    if unit == "tbsp":
+        output = (quantity * 5, "ml")
+    elif unit == "tsp":
+        output = (quantity * 15, "ml")
+    elif unit in ["cups", "cup"]:
+        output = (quantity * 235, "ml")
+    elif unit == "dl":
+        output = (quantity * 100, "ml")
+    elif unit == "l":
+        output = (quantity * 1000, "ml")
+    elif unit == "pint":
+        output = (quantity * 473, "ml")
+    elif unit == "oz":
+        output = (quantity * 29.5, "ml")
+    elif unit == "kg":
+        output = (quantity * 1000, "g")
+    elif unit == "hg":
+        output = (quantity * 100, "g")
+    elif unit == "g":
+        output = (quantity, "g")
+    else:
+        print("Hm?")
+        output = ("Unkown type!", "Many")
 
     return output
 
