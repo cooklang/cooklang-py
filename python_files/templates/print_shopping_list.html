@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Shopping List</h1>
+<!-- Add your shopping list content here -->
+{% for item, key in shoppinglist.items() %}
+  <li>{{item}}:  {{key}} </li>
+{% endfor %}
+<form action="" method="POST">
+  <button class="btn btn-primary" name="button" value="empty_list">Clear list</button>
+</form>
+{% endblock %}
+

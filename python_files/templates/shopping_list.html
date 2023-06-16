@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Recipes in list</h1>
+<!-- Add your shopping list content here -->
+{% for item, key in recipes.items() %}
+  <div class="card">
+    <div class="card-body">{{item}}
+    <form action="" method="POST" class="right_aligned">
+      <button class="btn btn-primary" name="button" value="{{key}}">Remove from list</button>
+    </form>
+    </div>
+    </div>
+  </div>
+{% endfor %}
+<div>
+</br>
+<a class="btn btn-primary" href="/printshoppinglist">View ingredients</a>
+<div></br></div>
+<form action="" method="POST">
+  <button class="btn btn-primary" name="button" value="clear_list">Clear list</button>
+</form>
+</div>
+{% endblock %}
+
