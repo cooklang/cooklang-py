@@ -17,6 +17,12 @@ The following programs are needed:
 * pip3 install flask
 * The project uses bootstrap 5.3.0, but that is included in the directory.
 
+To use https follow these steps:
+* pip3 install pyopenssl
+* generate a cert.pem and key.pem by running the following command (set days to something reasonable):
+  "openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365"
+* copy key.pem and cert.pem to the python\_files folder.
+* It is now possible to run the webpage securely, but you will need to install the certificate the first time you visit the website.
 
 The code has been checked with black, flake8 and pylint
 
