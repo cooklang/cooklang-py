@@ -39,10 +39,10 @@ def standardize_time(quantity, unit):
 def standardize_units(quantity, unit):
     """Input volume or weight. Return ml or g"""
     # This will return unit in ml or g
-    if unit == "tbsp":
-        output = (quantity * 5, "ml")
-    elif unit == "tsp":
+    if unit in ["tbsp", "msk"]:
         output = (quantity * 15, "ml")
+    elif unit in ["tsp", "tsk"]:
+        output = (quantity * 5, "ml")
     elif unit in ["cups", "cup"]:
         output = (quantity * 235, "ml")
     elif unit == "dl":
@@ -53,6 +53,8 @@ def standardize_units(quantity, unit):
         output = (quantity * 473, "ml")
     elif unit == "oz":
         output = (quantity * 29.5, "ml")
+    elif unit in ["pinch", "pinches", "krm"]:
+        output = (quantity, "ml")
     elif unit == "kg":
         output = (quantity * 1000, "g")
     elif unit == "hg":
@@ -141,10 +143,15 @@ def merge_ingredients(ingredients_list):
                     "l",
                     "dl",
                     "tbsp",
+                    "msk",
                     "tsp",
+                    "tsk",
                     "cups",
                     "pint",
                     "oz",
+                    "pinch",
+                    "pinches",
+                    "krm",
                 ]:
                     form = "ml"
                 elif form != "":
