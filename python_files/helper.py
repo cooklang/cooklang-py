@@ -27,9 +27,9 @@ def standardize_time(quantity, unit):
         # lower and higher range.
         # This is not hard, but I don't really want to. I'm tired.
         unit = "NOPE"
-    if unit in ["m", "min", "minute", "minutes"]:
+    if unit in {"m", "min", "minute", "minutes"}:
         output = (quantity, "minutes")
-    elif unit in ["h", "hour", "hours"]:
+    elif unit in {"h", "hour", "hours"}:
         output = (quantity * 60, "minutes")
     else:
         output = (0, "Can't parse ranges")
@@ -39,11 +39,11 @@ def standardize_time(quantity, unit):
 def standardize_units(quantity, unit):
     """Input volume or weight. Return ml or g"""
     # This will return unit in ml or g
-    if unit == "tbsp":
-        output = (quantity * 5, "ml")
-    elif unit == "tsp":
+    if unit in {"tbsp", "msk"}:
         output = (quantity * 15, "ml")
-    elif unit in ["cups", "cup"]:
+    elif unit in {"tsp", "tsk"}:
+        output = (quantity * 5, "ml")
+    elif unit in {"cups", "cup"}:
         output = (quantity * 235, "ml")
     elif unit == "dl":
         output = (quantity * 100, "ml")
@@ -53,6 +53,8 @@ def standardize_units(quantity, unit):
         output = (quantity * 473, "ml")
     elif unit == "oz":
         output = (quantity * 29.5, "ml")
+    elif unit in {"pinch", "pinches", "krm"}:
+        output = (quantity, "ml")
     elif unit == "kg":
         output = (quantity * 1000, "g")
     elif unit == "hg":
@@ -61,7 +63,7 @@ def standardize_units(quantity, unit):
         output = (quantity, "g")
     else:
         print("Hm?")
-        output = ("Unkown type!", "Many")
+        output = ("Unknown type!", "Many")
 
     return output
 
@@ -137,15 +139,20 @@ def merge_ingredients(ingredients_list):
             for quantity, unit in ingredients_list[item]:
                 if unit:
                     sum_units = sum_units + standardize_units(quantity, unit)
-                if form != "" and unit in [
+                if form != "" and unit in {
                     "l",
                     "dl",
                     "tbsp",
+                    "msk",
                     "tsp",
+                    "tsk",
                     "cups",
                     "pint",
                     "oz",
-                ]:
+                    "pinch",
+                    "pinches",
+                    "krm",
+                }:
                     form = "ml"
                 elif form != "":
                     form = "g"
