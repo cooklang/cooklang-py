@@ -15,6 +15,8 @@ The following programs are needed:
 * python3.9-devutils
 * pip for python3.9
 * pip3 install flask
+* The project uses bootstrap 5.3.0, but that is included in the directory.
+
 
 The code has been checked with black, flake8 and pylint
 
