@@ -27,9 +27,9 @@ def standardize_time(quantity, unit):
         # lower and higher range.
         # This is not hard, but I don't really want to. I'm tired.
         unit = "NOPE"
-    if unit in {"m", "min", "minute", "minutes"}:
+    if unit in {"m", "min", "minute", "minutes", "minut", "minuter"}:
         output = (quantity, "minutes")
-    elif unit in {"h", "hour", "hours"}:
+    elif unit in {"h", "hour", "hours", "timme", "timmar"}:
         output = (quantity * 60, "minutes")
     else:
         output = (0, "Can't parse ranges")
