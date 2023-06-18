@@ -4,7 +4,7 @@ File containing Recipe class
 This class contains data related to recipe.
 """
 
-from helper import standardize_time, convert_str_to_float
+from helper import convert_str_to_float
 from cooklang import parseRecipe
 
 
@@ -81,7 +81,7 @@ class Recipe:
         # Print header
         string = ""
         # Find longest name, so that formatting can be based on that
-        max_len_name = max([len(item["name"]) for item in self.ingredients])
+        max_len_name = max({len(item["name"]) for item in self.ingredients})
         for item in self.ingredients:
             if item["type"] == "ingredient":
                 quantity = convert_str_to_float(item["quantity"])
@@ -109,13 +109,10 @@ class Recipe:
 
         string = ""
         index = 1
-        time = 0
-        time_unit = ""
         for step in self.steps:
             text = []
             cookware = []
             ingredient = []
-            timer = []
 
             for sub_step in step:
                 if sub_step["type"] == "text":
@@ -140,12 +137,7 @@ class Recipe:
                     )
                 elif sub_step["type"] == "timer":
                     quantity = convert_str_to_float(sub_step["quantity"])
-                    (quantity, time_unit) = standardize_time(
-                        quantity, sub_step["units"]
-                    )
-                    time = time + quantity
-                    text.append(f"{quantity} {time_unit}")
-                    timer.append((quantity, sub_step["units"]))
+                    text.append(f"{quantity} {sub_step['units']}")
 
             # Print step
             string = string + f'     {index}. {"".join(text)}\n'
@@ -158,8 +150,5 @@ class Recipe:
             else:
                 string = string + "        [-]\n"
             index = index + 1
-
-        if time > 0:
-            string = string + f"\nEstimated time: {time} {time_unit}\n"
 
         return string

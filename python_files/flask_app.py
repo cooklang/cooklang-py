@@ -151,7 +151,6 @@ def main(ip="0.0.0.0"):
     """Start the application. Entry point for the flask application"""
     # Start application
     app.run(ssl_context=("cert.pem", "key.pem"), debug=False, host=ip)
-§
 
 
 if __name__ == "__main__":

@@ -11,29 +11,18 @@ RecipeFile = namedtuple("RecipeFile", "file path")
 def convert_str_to_float(string):
     """Input a string (50.000) for instance. Return integer 50"""
     try:
-        quantity = float(string)
+        tmp_val = float(string)
+        if (tmp_val % 1) == 0:
+            # No decimal value. Can be converted to an integer.
+            quantity = f"{int(tmp_val)}"
+        else:
+            # Float value with decimal value. Keep as it is.
+            quantity = f"{tmp_val}"
     except ValueError:
-        quantity = 0.0
+        # This is probably a range that has been specified.
+        quantity = string
 
     return quantity
-
-
-def standardize_time(quantity, unit):
-    """Align time units. Input hour or minutes, return minutes"""
-    output = ("0", "minutes")
-    if not isinstance(quantity, float) and "-" in quantity:
-        # A dash is a sign of ranges.
-        #  Parsing and combining this would require a split into
-        # lower and higher range.
-        # This is not hard, but I don't really want to. I'm tired.
-        unit = "NOPE"
-    if unit in {"m", "min", "minute", "minutes", "minut", "minuter"}:
-        output = (quantity, "minutes")
-    elif unit in {"h", "hour", "hours", "timme", "timmar"}:
-        output = (quantity * 60, "minutes")
-    else:
-        output = (0, "Can't parse ranges")
-    return output
 
 
 def standardize_units(quantity, unit):
