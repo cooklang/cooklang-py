@@ -40,8 +40,11 @@ class ShoppingList:
             int_q = quantity
             int_unit = unit
         if item not in self.shopping_list:
-            self.shopping_list[item] = Ingredient(int_q, int_unit)
-        else:
+            if isinstance(int_q, float):
+                self.shopping_list[item] = Ingredient(int_q, int_unit)
+            else:
+                self.shopping_list[item] = Ingredient(0, int_unit)
+        elif isinstance(int_q, float):
             current = self.shopping_list[item]
             self.shopping_list[item] = Ingredient(
                 current.quantity + int_q, current.unit
