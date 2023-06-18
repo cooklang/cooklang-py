@@ -28,6 +28,15 @@ def convert_str_to_float(string):
 def standardize_units(quantity, unit):
     """Input volume or weight. Return ml or g"""
     # This will return unit in ml or g
+
+    try:
+        # The input can be a string, which will give us a fun
+        # behaviour. 2 dl will return the string '2'*100, i.e. 100 2's
+        quantity = float(quantity)
+    except ValueError:
+        print("Failed to convert this. Set amount to 0")
+        quantity = 0.0
+
     if unit in {"tbsp", "msk"}:
         output = (quantity * 15, "ml")
     elif unit in {"tsp", "tsk"}:
@@ -52,7 +61,7 @@ def standardize_units(quantity, unit):
         output = (quantity, "g")
     else:
         print("Hm?")
-        output = ("Unknown type!", "Many")
+        output = (0.0, "Unknown unit")
 
     return output
 
