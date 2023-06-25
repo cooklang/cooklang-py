@@ -34,13 +34,19 @@ class ShoppingList:
 
     def add_ingredient(self, item, quantity, unit):
         """Add ingredients to the shopping list"""
+        converted = False
         if unit:
             (int_q, int_unit) = standardize_units(quantity, unit)
+            converted = True
+        elif quantity != "some":
+            converted = True
+            (int_q, _) = standardize_units(quantity, unit)
+            int_unit = ''
         else:
             int_q = quantity
             int_unit = unit
         if item not in self.shopping_list:
-            if isinstance(int_q, float):
+            if converted:
                 self.shopping_list[item] = Ingredient(int_q, int_unit)
             else:
                 self.shopping_list[item] = Ingredient(0, int_unit)
