@@ -34,7 +34,7 @@ def standardize_units(quantity, unit):
         # behaviour. 2 dl will return the string '2'*100, i.e. 100 2's
         quantity = float(quantity)
     except ValueError:
-        print("Failed to convert this. Set amount to 0")
+        print(f"Failed to convert {quantity:unit}. Set amount to 0")
         quantity = 0.0
 
     if unit in {"tbsp", "msk"}:
@@ -60,8 +60,7 @@ def standardize_units(quantity, unit):
     elif unit == "g":
         output = (quantity, "g")
     else:
-        print("Hm?")
-        output = (0.0, "Unknown unit")
+        output = (quantity, "Unknown unit")
 
     return output
 
