@@ -40,7 +40,7 @@
   {% if key == "TAB" %}
     <div class='metadata-step'>{{ item }} </div>
   {% else %}
-    {% if not item.startswith("1") %}
+    {% if not item.startswith("1.") %}
       <br>
     {% endif %}
     <div class='recipe-step'>{{ item }}</div>
