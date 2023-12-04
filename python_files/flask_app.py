@@ -116,11 +116,21 @@ def recipe():
         if request.form.get("add_to_recipe") == "add":
             # add this recipe to the shopping_list
             add_to_shoppinglist(path)
-
     else:
         path = request.args.get("recipe_path")
 
     int_recipe = Recipe(path)
+
+    factor = request.form.get("scale_factor")
+    if factor:
+        try:
+            factor = float(factor)
+            int_recipe.scale(factor)
+        except ValueError:
+            print("Input needs to be a float")
+    else:
+        factor = 1
+
     ingredients = []
     for item in int_recipe.ingredients:
         quantity = convert_str_to_float(item["quantity"])

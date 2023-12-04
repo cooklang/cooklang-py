@@ -19,8 +19,15 @@
 <form action="" method="POST">
 <button class="btn btn-primary" name="add_to_recipe" value="add">Add to shopping list</button>
 </form>
+<form action="" method="POST">
+<input id="scale_factor" type="number" name="scale_factor" step="0.01" min="0.25"/>
+<button class="btn btn-primary" name="scale_button" value="scale">Scale recipe</button>
+</form>
+<i><small>Note: adding a scaled recipe adds the non-scaled version to shopping cart. Metadata is not scaled.</small></i>
+
 <h3>Metadata</h3>
 <div>
+  <ul>Current scaling: {{scale_factor}}</ul>
 {% for item, key in metadata.items() %}
   <ul>{{item}}: {{key}}</ul>
 {% endfor %}

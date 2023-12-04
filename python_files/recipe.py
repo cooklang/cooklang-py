@@ -62,6 +62,18 @@ class Recipe:
         """Return internal steps string representation"""
         return self.get_steps_str()
 
+    def scale(self, factor):
+        if not factor:
+            return
+        for i in range(0, len(self._ingredients)):
+            if 'quantity' in self._ingredients[i]:
+                try:
+                    quantity = float(self._ingredients[i]['quantity'])
+                    self._ingredients[i]['quantity'] = quantity * factor
+                except ValueError:
+                    # This was not a float. It's ok.
+                    pass
+
     def get_metadata_str(self):
         """Return a string representation of metadata"""
         if not self._metadata:
